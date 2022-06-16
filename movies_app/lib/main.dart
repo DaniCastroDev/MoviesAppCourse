@@ -45,6 +45,7 @@ class Home extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+        backgroundColor: Colors.grey[200],
         appBar: AppBar(
           title: const Text('IMDB Movies App'),
           centerTitle: true,
@@ -66,9 +67,65 @@ class Home extends StatelessWidget {
           child: Center(child: Text('Hola desde el drawer')),
         ),
         body: const TabBarView(children: [
-          Center(child: Text('Primera')),
+          Center(child: MovieCard()),
+          // Center(child: Text('Primera')),
           Center(child: Text('Segunda')),
         ]),
+      ),
+    );
+  }
+}
+
+class MovieCard extends StatelessWidget {
+  const MovieCard({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 200,
+      child: Card(
+        elevation: 0,
+        clipBehavior: Clip.hardEdge,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
+                  clipBehavior: Clip.hardEdge,
+                  child: Image.network(
+                    'https://m.media-amazon.com/images/I/91Tr+bhnMUL._AC_SL1500_.jpg',
+                    fit: BoxFit.fill,
+                  )),
+              Column(
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10.0),
+                    child: Text(
+                      'Spider-Man: Into the Spider-Verse',
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text('1h 57m'),
+                      Row(
+                        children: [
+                          const Text('8,4'),
+                          Icon(Icons.star, color: Colors.yellow[700], size: 18),
+                        ],
+                      ),
+                    ],
+                  )
+                ],
+              )
+            ],
+          ),
+        ),
       ),
     );
   }
